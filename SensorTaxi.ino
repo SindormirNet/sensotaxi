@@ -12,12 +12,14 @@ void setup() {
 
   //i2c_scan();
   wifi_setup();
-  
+
   oled_init();
   luz_setup();
   tareas_init();
   oled_intro();
-  get_chip_id();
+  
+  Serial.printf("ESP32 Chip ID = %04X", (uint16_t)(get_chip_id() >> 32)); //print High 2 bytes
+  Serial.printf("%08X\n", (uint32_t)get_chip_id()); //print Low 4bytes.
 }
 
 void loop() {
@@ -33,7 +35,9 @@ void loop() {
     if (i++ == 100) {
       i = 0;
       luz_get_value();
-    }  
+    }
+
+
   }
 }
 
