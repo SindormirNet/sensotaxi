@@ -27,6 +27,8 @@ void loop() {
   while (1) {
     display.clear();
     oled_progress(i);
+    oled_progress2(100-i);
+    oled_progress3(i/2);
     oled_luz();
     oled_mq135(mq135_get_value());
     display.display();

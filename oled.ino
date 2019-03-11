@@ -46,3 +46,15 @@ void oled_progress(int progress) {
 
 }
 
+void oled_progress2(int progress) {
+  display.drawProgressBar(0, 12, 100, 10, progress);
+  display.setFont(ArialMT_Plain_10);
+  display.drawString(105, 12, String(progress));
+}
+
+void oled_progress3(int progress) {
+  display.drawProgressBar(0, 0, 100, 10, progress);
+  display.setFont(ArialMT_Plain_10);
+  display.drawString(105, 0, String(progress));
+}
+
