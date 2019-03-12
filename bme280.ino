@@ -17,33 +17,25 @@ void bme280_setup() {
 
 float bme280_get_temp() {
   float temp = bme.readTemperature();
-  Serial.print("Temperature = ");
-  Serial.print(temp);
-  Serial.println(" *C");
+  //Serial.print("Temperature = "); Serial.print(temp); Serial.println(" *C");
   return temp;
 }
 
 float bme280_get_hum() {
   float humedad = bme.readHumidity();
-  Serial.print("Humedad = ");
-  Serial.print(humedad);
-  Serial.println(" %");
+  //Serial.print("Humedad = "); Serial.print(humedad); Serial.println(" %");
   return humedad;
 }
 
 float bme280_get_alt() {
   float altitud = bme.readAltitude(SEALEVELPRESSURE_HPA);
-  Serial.print("Altitud = ");
-  Serial.print(altitud);
-  Serial.println(" %");
+  //Serial.print("Altitud = "); Serial.print(altitud);   Serial.println(" %");
   return altitud;
 }
 
 float bme280_get_pres() {
   float presion = bme.readPressure() / 100.0F;
-  Serial.print("Presion = ");
-  Serial.print(presion);
-  Serial.println(" %");
+  //Serial.print("Presion = ");  Serial.print(presion);  Serial.println(" %");
   return presion;
 }
 

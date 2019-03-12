@@ -42,24 +42,20 @@ void wifi_connect() {
     client.println("Connection: close");
     client.println();
 
-    Serial.println("---------------------------");
     while (client.connected()) {
       String line = client.readStringUntil('\n');
       if (line == "\r") {
-        Serial.println("Cabeceras recibidas");
         break;
-      }
-      else {
-        Serial.print("@");
       }
     }
 
     // Leemos los datos de respuesta del servidor
-    Serial.println("---------------------------");
+    Serial.print("Recibido desde el server: ");
     while (client.available()) {
       char c = client.read();
       Serial.write(c);
     }
+    Serial.println();
 
     client.stop();
 

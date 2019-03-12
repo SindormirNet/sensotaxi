@@ -1,6 +1,7 @@
 void tareas_init() {
   xTaskCreate(task_led_blink, "parpadeo", 10000, NULL, 0, NULL);
   xTaskCreate(task_update_oled, "OLED", 10000, NULL, 0, NULL);
+  xTaskCreate(task_gps, "GPS", 10000, NULL, 0, NULL);
 }
 
 void task_led_blink(void * pvParameters) {
@@ -9,6 +10,14 @@ void task_led_blink(void * pvParameters) {
     delay(1000);
   }
 }
+
+void task_gps(void * pvParameters) {
+  while (true) {
+    gps_printdata2();
+  }
+}
+
+
 
 void task_update_oled(void * pvParameters) {
   unsigned int i = 0;

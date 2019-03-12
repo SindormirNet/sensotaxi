@@ -8,7 +8,6 @@ void luz_setup() {
 
 int luz_get_value() {
   uint16_t lux = LightSensor.GetLightIntensity();
-  Serial.print("Light: ");
-  Serial.println(lux);
+  //Serial.print("Light: "); Serial.println(lux);
   return lux;
 }

@@ -21,7 +21,6 @@ void oled_intro() {
   display.setFont(ArialMT_Plain_16); //24
   display.drawString(5, 10, "SENSOR TAXI\nEsperando Wifi");
   display.display();
-  //delay(2000);
 }
 
 

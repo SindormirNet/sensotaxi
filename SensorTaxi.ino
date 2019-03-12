@@ -19,6 +19,7 @@ void setup() {
 
   wifi_setup();
   bme280_setup();
+  gps_setup();
 
   sound_setup();
   mq135_setup();
@@ -45,6 +46,7 @@ void loop() {
     oled_mq135(mq135_get_value());
     oled_mq132(mq132_get_value());
     oled_sound(sound_get_value());
+
 
     display.display();
     delay(10);
