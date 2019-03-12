@@ -19,42 +19,59 @@ void oled_init() {
 void oled_intro() {
   display.clear();
   display.setFont(ArialMT_Plain_16); //24
-  display.drawString(5, 10, "SENSOR TAXI\nTest 1");
+  display.drawString(5, 10, "SENSOR TAXI\nEsperando Wifi");
   display.display();
   //delay(2000);
 }
 
 
-void oled_luz() {
-  int luz = analogRead(37);
-  
-  display.drawProgressBar(0, 24, 100, 10, luz * 100 / 4096);
+void oled_temp(int temp) {
   display.setFont(ArialMT_Plain_10);
+  display.drawString(0, 0, "T:");
+  display.drawProgressBar(12, 0, 28, 10, temp);
+  display.drawString(44, 0, String(temp));
+}
+
+void oled_pres(int pres) {
+  display.setFont(ArialMT_Plain_10);
+  display.drawString(60, 0, "P:");
+  display.drawProgressBar(72, 0, 28, 10, pres/10-50);
+  display.drawString(105, 0, String(pres));
+}
+
+
+void oled_sound(int sonido) {
+
+  display.setFont(ArialMT_Plain_10);
+  display.drawString(0, 12, "Snd:");
+  
+  display.drawProgressBar(25, 12, 75, 10, sonido * 100 / 4096);
+  display.drawString(105, 12, String(sonido));
+}
+
+void oled_luz(int luz) {
+  display.setFont(ArialMT_Plain_10);
+  display.drawString(0, 24, "Lux:");
+  
+  display.drawProgressBar(25, 24, 75, 10, luz * 100 / 15000);
+  
   display.drawString(105, 24, String(luz));
 }
 
 void oled_mq135(int value) {
-  display.drawProgressBar(0, 36, 100, 10, value * 100 / 4096);
   display.setFont(ArialMT_Plain_10);
+  display.drawString(0, 36, "135:");
+  
+  display.drawProgressBar(25, 36, 75, 10, value * 100 / 4096);
   display.drawString(105, 36, String(value));
 }
 
-void oled_progress(int progress) {
-  display.drawProgressBar(0, 48, 100, 10, progress);
+void oled_mq132(int value) {
   display.setFont(ArialMT_Plain_10);
-  display.drawString(105, 48, String(progress));
+  display.drawString(0, 48, "132:");
+  
+  display.drawProgressBar(25, 48, 75, 10, value * 100 / 4096);
+  display.drawString(105, 48, String(value));
 
-}
-
-void oled_progress2(int progress) {
-  display.drawProgressBar(0, 12, 100, 10, progress);
-  display.setFont(ArialMT_Plain_10);
-  display.drawString(105, 12, String(progress));
-}
-
-void oled_progress3(int progress) {
-  display.drawProgressBar(0, 0, 100, 10, progress);
-  display.setFont(ArialMT_Plain_10);
-  display.drawString(105, 0, String(progress));
 }
 

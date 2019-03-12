@@ -10,7 +10,7 @@ void i2c_scan() {
   byte error, address;
   int nDevices;
 
-  Serial.println("Scanning...");
+  Serial.println("Buscando...");
 
   nDevices = 0;
   for (address = 1; address < 127; address++ ) {

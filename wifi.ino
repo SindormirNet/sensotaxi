@@ -3,7 +3,7 @@
 
 WiFiClientSecure client;
 
-const char*  server = "sindormir.net";
+const char* server   = "sindormir.net";
 const char* ssid     = "sindormir.net2";
 const char* password = "espaciomiscela";
 
