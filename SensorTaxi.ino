@@ -15,7 +15,7 @@ void setup() {
 
   neopixel_setup();
 
-  //neopixel_test();
+  neopixel_all_on();
 
   wifi_setup();
   bme280_setup();
@@ -26,6 +26,7 @@ void setup() {
 
   luz_setup();
   tareas_init();
+  neopixel_all_off();
 
 
   Serial.printf("ESP32 Chip ID = %04X", (uint16_t)(get_chip_id() >> 32)); //print High 2 bytes
