@@ -4,8 +4,8 @@
 WiFiClientSecure client;
 
 const char* server   = "sindormir.net";
-const char* ssid     = "sindormir.net2";
-const char* password = "espaciomiscela";
+extern const char* ssid;
+extern const char* password;
 
 
 static void wifi_setup() {
