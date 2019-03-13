@@ -35,6 +35,33 @@ void gps_printdata() {
 
 }
 
+String gps_get_date(){
+  String result= String (GPS.hour) + ':' + String (GPS.minute) + ':' + String(GPS.seconds) + ':' + String(GPS.milliseconds);
+  return result;
+  
+}
+
+String gps_get_hour(){
+  String result= String(GPS.day) + '/' + String(GPS.month) + "/20" + String (GPS.year, DEC);
+  return result; 
+}
+
+String gps_get_latitude(){
+  return "41.023233";
+}
+
+String gps_get_longitude(){
+  return "3.020333";
+}
+
+
+String gps_get_altitude(){
+  return "543";
+}
+
+
+
+
 void gps_printdata2() {
   static unsigned long timer;
 

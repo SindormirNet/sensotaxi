@@ -24,7 +24,22 @@ static void wifi_setup() {
 void wifi_connect() {
 
   String get_string = "GET https://sindormir.net/~syvic/sensortaxi";
-  String get_params = String ("?id=" + String(get_chip_id()) + "&ligth=" + analogRead(37) + "&gas=" + analogRead(MQ135_PIN) );
+  String get_params = String ("?id=" + String(get_chip_id()) + 
+                              "&temp="  + bme280_get_temp() + 
+                              "&hum="  + bme280_get_hum() + 
+                              "&alt="  + bme280_get_alt() + 
+                              "&pres="  + bme280_get_pres() + 
+                              "&ligth="  + luz_get_value() + 
+                              "&mq135="  + mq135_get_value() + 
+                              "&mq132="  + mq132_get_value() + 
+                              "&sound="  + sound_get_value() + 
+                              "&bounce="  + accel_get_bounche() + 
+                              "&gps_date=" + gps_get_date() +
+                              "&gps_hour=" + gps_get_hour() +
+                              "&gps_lat=" + gps_get_latitude() +
+                              "&gps_long=" + gps_get_longitude() +
+                              "&gps_alt=" + gps_get_altitude()
+                              );
   String http_version = " HTTP/1.0";
 
   //client.setCACert(test_root_ca);
