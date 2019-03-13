@@ -1,9 +1,11 @@
 #include <WiFi.h>
 #include <WiFiClientSecure.h>
 
-WiFiClientSecure client;
+//[SSL] WiFiClientSecure client;
+WiFiClient client;
 
-const char* server   = "sindormir.net";
+//[SSL] const char* server   = "sindormir.net";
+const char* server   = "sensortaxi.asako.org";
 extern const char* ssid;
 extern const char* password;
 
@@ -23,7 +25,8 @@ static void wifi_setup() {
 
 void wifi_connect() {
 
-  String get_string = "GET https://sindormir.net/~syvic/sensortaxi";
+  //[SSL] String get_string = "GET https://sindormir.net/~syvic/sensortaxi";
+  String get_string = "GET http://sensortaxi.asako.org/entradato.php";
   String get_params = String ("?id=" + String(get_chip_id()) + 
                               "&temp="  + bme280_get_temp() + 
                               "&hum="  + bme280_get_hum() + 
@@ -47,13 +50,14 @@ void wifi_connect() {
   //client.setPrivateKey(test_client_cert);  // for client verification
 
   Serial.print("Conectando al server...");
-  if (client.connect(server, 443)) {
+  //[SSL] if (client.connect(server, 443)) {
+  if (client.connect(server, 80)) {
     Serial.println("OK!");
 
     client.println(String (get_string + get_params + http_version));
     Serial.println(String (get_string + get_params + http_version));
 
-    client.println("Host: sindormir.net");
+    client.println("Host: sensortaxi.asako.org");
     client.println("Connection: close");
     client.println();
 
