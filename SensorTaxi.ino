@@ -35,7 +35,7 @@ void setup() {
   mq132_setup();
 
   luz_setup();
-  accel_setup();
+  //accel_setup();
   tareas_init();
   neopixel_all_off();
 
@@ -64,7 +64,7 @@ void loop() {
     oled_sound(sound);
     display.display();
 
-    accel_getdata();
+    //accel_getdata();
 
 
     delay(10);
