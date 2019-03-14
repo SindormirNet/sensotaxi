@@ -22,7 +22,7 @@ int accel_get_bounche() {
 void accel_setup() {
   if (!accel.begin()) {
     Serial.println("No se ha detectado el ADXL345");
-    while(1);
+    //while(1);
   }
   accel.setRange(ADXL345_RANGE_16_G);
 }
