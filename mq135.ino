@@ -1,3 +1,6 @@
+//SEN0132 -> Monóxido de Carbono (MQ7)
+//SENMQ135 -> Varios gases
+
 #define MQ135_PIN 36
 #define MQ132_PIN 37
 #define PROMEDIO 10

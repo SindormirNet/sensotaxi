@@ -1,15 +1,14 @@
 #include <WiFi.h>
-//[SSL] #include <WiFiClientSecure.h>
+//#include <WiFiClientSecure.h> //[SSL]
 #include <WiFiClient.h>
 
-//[SSL] WiFiClientSecure client;
+//WiFiClientSecure client; //[SSL]
 WiFiClient client;
 
-//[SSL] const char* server   = "sindormir.net";
+//const char* server   = "sindormir.net"; //[SSL]
 const char* server   = "sensortaxi.asako.org";
 extern const char* ssid;
 extern const char* password;
-
 
 static void wifi_setup() {
   Serial.print("Conectando...");
@@ -29,20 +28,21 @@ void wifi_connect() {
 
   get_params.reserve(300);
 
-  //[SSL] String get_string = "GET https://sindormir.net/~syvic/sensortaxi";
+  //String get_string = "GET https://sindormir.net/~syvic/sensortaxi";//[SSL]
   String get_string = "GET http://sensortaxi.asako.org/entradato.php";
   String http_version = " HTTP/1.0";
 
+
   if (gps_data_valid == 0) {
     get_params = String ("?id=" + String(get_chip_id())     +
-                         "&temp="     + bme280_get_temp()   +
+                         "&temp="     + bme280_temp   +
                          "&hum="      + bme280_get_hum()    +
                          "&alt="      + bme280_get_alt()    +
-                         "&pres="     + bme280_get_pres()   +
-                         "&ligth="    + luz_get_value()     +
-                         "&mq135="    + mq135_get_value()   +
-                         "&mq132="    + mq132_get_value()   +
-                         "&sound="    + sound_get_value()   +
+                         "&pres="     + bme280_pres   +
+                         "&ligth="    + light     +
+                         "&mq135="    + mq135   +
+                         "&mq132="    + mq132   +
+                         "&sound="    + sound   +
                          "&bounce="   + accel_get_bounche() +
                          "&gps_date=" + gps_get_date()      +
                          "&gps_hour=" + gps_get_hour()      +
@@ -52,14 +52,14 @@ void wifi_connect() {
   }
   else {
     get_params = String ("?id=" + String(get_chip_id())     +
-                         "&temp="    + bme280_get_temp()   +
+                         "&temp="    + bme280_temp   +
                          "&hum="     + bme280_get_hum()    +
                          "&alt="     + bme280_get_alt()    +
-                         "&pres="    + bme280_get_pres()   +
-                         "&ligth="   + luz_get_value()     +
-                         "&mq135="   + mq135_get_value()   +
-                         "&mq132="   + mq132_get_value()   +
-                         "&sound="   + sound_get_value()   +
+                         "&pres="    + bme280_pres   +
+                         "&ligth="   + light     +
+                         "&mq135="   + mq135   +
+                         "&mq132="   + mq132   +
+                         "&sound="   + sound   +
                          "&bounce="  + accel_get_bounche() +
                          "&gps_date=0&gps_hour=0&gps_lat=0&gps_long=0&gps_alt=0");
   }
@@ -69,15 +69,16 @@ void wifi_connect() {
   //client.setCertificate(test_client_key); // for client verification
   //client.setPrivateKey(test_client_cert);  // for client verification
 
-  Serial.print("Conectando al server...");
-  //[SSL] if (client.connect(server, 443)) {
+  //Serial.print("Conectando al server...");
+  //if (client.connect(server, 443)) { //[SSL]
   if (client.connect(server, 80)) {
-    Serial.println("OK!");
+    //Serial.println("OK!");
 
     client.println(String (get_string + get_params + http_version));
-    Serial.println(String (get_string + get_params + http_version));
+    //Serial.println(String (get_string + get_params + http_version));
 
     client.println("Host: sensortaxi.asako.org");
+    //client.println("Host: sindormir.net"); //[SSL]
     client.println("Connection: close");
     client.println();
 
@@ -89,18 +90,18 @@ void wifi_connect() {
     }
 
     // Leemos los datos de respuesta del servidor
-    Serial.println("Recibido desde el server: ");
+    //Serial.println("Recibido desde el server: ");
     while (client.available()) {
       char c = client.read();
-      Serial.write(c);
+      //Serial.write(c);
     }
-    Serial.println();
+    //Serial.println();
 
     client.stop();
 
   }
   else {
-    Serial.println("Fallo!");
+    //Serial.println("Fallo!");
   }
 }
 

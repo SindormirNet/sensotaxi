@@ -1,3 +1,5 @@
+//BME280 de Adafruit
+
 //Conexiones de este periférico:
 //BME   -->   ESP32
 //VIN   -->   3.3V

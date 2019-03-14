@@ -1,3 +1,5 @@
+//SEN126A2 Sparkfun Sound Detector
+
 //Conexiones de este periférico:
 //SOUND  -->   ESP32
 //GND    -->   GND
