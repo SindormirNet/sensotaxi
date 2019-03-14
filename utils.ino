@@ -1,6 +1,21 @@
-unsigned int get_chip_id(){
+double convertDegMinToDecDeg (float degMin) {
+  double min = 0.0;
+  double decDeg = 0.0;
+
+  //get the minutes, fmod() requires double
+  min = fmod((double)degMin, 100.0);
+
+  //rebuild coordinates in decimal degrees
+  degMin = (int) ( degMin / 100 );
+  decDeg = degMin + ( min / 60 );
+
+  return decDeg;
+}
+
+
+unsigned int get_chip_id() {
   unsigned int chipid;
-  
+
   chipid = ESP.getEfuseMac();//The chip ID is essentially its MAC address(length: 6 bytes).
 
   return chipid;

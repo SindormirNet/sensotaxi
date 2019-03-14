@@ -1,5 +1,6 @@
 #include <WiFi.h>
-#include <WiFiClientSecure.h>
+//[SSL] #include <WiFiClientSecure.h>
+#include <WiFiClient.h>
 
 //[SSL] WiFiClientSecure client;
 WiFiClient client;
@@ -24,26 +25,45 @@ static void wifi_setup() {
 
 
 void wifi_connect() {
+  String get_params;
+
+  get_params.reserve(300);
 
   //[SSL] String get_string = "GET https://sindormir.net/~syvic/sensortaxi";
   String get_string = "GET http://sensortaxi.asako.org/entradato.php";
-  String get_params = String ("?id=" + String(get_chip_id()) + 
-                              "&temp="  + bme280_get_temp() + 
-                              "&hum="  + bme280_get_hum() + 
-                              "&alt="  + bme280_get_alt() + 
-                              "&pres="  + bme280_get_pres() + 
-                              "&ligth="  + luz_get_value() + 
-                              "&mq135="  + mq135_get_value() + 
-                              "&mq132="  + mq132_get_value() + 
-                              "&sound="  + sound_get_value() + 
-                              "&bounce="  + accel_get_bounche() + 
-                              "&gps_date=" + gps_get_date() +
-                              "&gps_hour=" + gps_get_hour() +
-                              "&gps_lat=" + gps_get_latitude() +
-                              "&gps_long=" + gps_get_longitude() +
-                              "&gps_alt=" + gps_get_altitude()
-                              );
   String http_version = " HTTP/1.0";
+
+  if (gps_data_valid == 0) {
+    get_params = String ("?id=" + String(get_chip_id())     +
+                         "&temp="     + bme280_get_temp()   +
+                         "&hum="      + bme280_get_hum()    +
+                         "&alt="      + bme280_get_alt()    +
+                         "&pres="     + bme280_get_pres()   +
+                         "&ligth="    + luz_get_value()     +
+                         "&mq135="    + mq135_get_value()   +
+                         "&mq132="    + mq132_get_value()   +
+                         "&sound="    + sound_get_value()   +
+                         "&bounce="   + accel_get_bounche() +
+                         "&gps_date=" + gps_get_date()      +
+                         "&gps_hour=" + gps_get_hour()      +
+                         "&gps_lat="  + gps_get_latitude()  +
+                         "&gps_long=" + gps_get_longitude() +
+                         "&gps_alt="  + gps_get_altitude());
+  }
+  else {
+    get_params = String ("?id=" + String(get_chip_id())     +
+                         "&temp="    + bme280_get_temp()   +
+                         "&hum="     + bme280_get_hum()    +
+                         "&alt="     + bme280_get_alt()    +
+                         "&pres="    + bme280_get_pres()   +
+                         "&ligth="   + luz_get_value()     +
+                         "&mq135="   + mq135_get_value()   +
+                         "&mq132="   + mq132_get_value()   +
+                         "&sound="   + sound_get_value()   +
+                         "&bounce="  + accel_get_bounche() +
+                         "&gps_date=0&gps_hour=0&gps_lat=0&gps_long=0&gps_alt=0");
+  }
+
 
   //client.setCACert(test_root_ca);
   //client.setCertificate(test_client_key); // for client verification
@@ -69,7 +89,7 @@ void wifi_connect() {
     }
 
     // Leemos los datos de respuesta del servidor
-    Serial.print("Recibido desde el server: ");
+    Serial.println("Recibido desde el server: ");
     while (client.available()) {
       char c = client.read();
       Serial.write(c);

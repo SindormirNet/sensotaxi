@@ -1,3 +1,9 @@
+//Conexiones de este periférico:
+//NeoPixel  -->   ESP32
+//5VDC      -->   5V
+//GND       -->   GND
+//DIN       -->   2
+
 #include <NeoPixelBus.h>
 
 const uint16_t PixelCount = 8;

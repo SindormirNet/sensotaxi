@@ -1,7 +1,9 @@
+volatile unsigned int gps_data_valid;
+
 void tareas_init() {
   xTaskCreate(task_led_blink, "parpadeo", 10000, NULL, 0, NULL);
   xTaskCreate(task_update_oled, "OLED", 10000, NULL, 0, NULL);
-  xTaskCreate(task_gps, "GPS", 10000, NULL, 0, NULL);
+  xTaskCreate(task_gps, "GPS", 100000, NULL, 0, NULL);
 }
 
 void task_led_blink(void * pvParameters) {
@@ -13,7 +15,7 @@ void task_led_blink(void * pvParameters) {
 
 void task_gps(void * pvParameters) {
   while (true) {
-    gps_printdata2();
+    gps_printdata();
   }
 }
 
@@ -22,7 +24,7 @@ void task_gps(void * pvParameters) {
 void task_update_oled(void * pvParameters) {
   unsigned int i = 0;
   static unsigned long t = 0;
- 
+
   while (true) {
     if (millis() - t > 5000) {
       t = millis();

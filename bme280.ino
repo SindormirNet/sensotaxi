@@ -1,4 +1,9 @@
-//https://learn.adafruit.com/adafruit-bme280-humidity-barometric-pressure-temperature-sensor-breakout/arduino-test
+//Conexiones de este periférico:
+//BME   -->   ESP32
+//VIN   -->   3.3V
+//GND   -->   GND
+//SCK   -->   15 (SCL)
+//SDI   -->   4 (SDA)
 
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
